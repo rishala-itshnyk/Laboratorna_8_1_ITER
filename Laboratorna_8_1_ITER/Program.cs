@@ -21,22 +21,29 @@ public class Program
     {
         int whileGroupsCount = Count(s);
         string result = "";
-
-        int index1 = 0, index2 = 0;
+        int index = 0;
         string searchString = "while";
 
-        while ((index1 = s.IndexOf(searchString, index1, StringComparison.OrdinalIgnoreCase)) != -1)
+        while ((index = s.IndexOf(searchString, index, StringComparison.OrdinalIgnoreCase)) != -1)
         {
-            result += s.Substring(index2, index1 - index2) + "**";
-            index2 = index1 + searchString.Length;
-            index1 = index2;
+            result += s.Substring(0, index) + "**";
+            s = s.Substring(index + searchString.Length);
+
+            if (s.Length >= searchString.Length)
+            {
+                index = 0;
+            }
+            else
+            {
+                break;
+            }
         }
 
-        result += s.Substring(index2);
+        result += s;
 
         return result;
     }
-    
+
     static void Main()
     {
         Console.WriteLine("Enter string:");
